@@ -1,3 +1,4 @@
+import TableList from "@/components/invoices/TableList";
 import { Stack, Typography } from "@mui/material";
 
 const Pages = () => {
@@ -10,6 +11,8 @@ const Pages = () => {
       >
         My Invoices
       </Typography>
+
+      <TableList />
     </Stack>
   );
 };
