@@ -12,6 +12,8 @@ import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { drawerWidth } from "@/constants/menu";
+import photo from "../../../public/profile-pict.png";
+import Image from "next/image";
 
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -42,15 +44,18 @@ function TopBar() {
   return (
     <AppBar
       position="static"
-      className="h-20 justify-center"
-      sx={{ paddingLeft: `${drawerWidth}px` }}
+      className="h-20 justify-center bg-white shadow-none"
+      sx={{
+        paddingLeft: `${drawerWidth}px`,
+        borderBottom: "1px solid var(--borderColor)",
+      }}
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters className="justify-end">
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Image src={photo} alt="user-profile" width={46} />
               </IconButton>
             </Tooltip>
             <Menu

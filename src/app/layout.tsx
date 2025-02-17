@@ -44,7 +44,11 @@ export default function RootLayout({
             }}
           >
             <TopBar />
-            {children}
+            <Box
+              sx={{ width: "80%", margin: "auto", padding: "52px 3px 3px 3px" }}
+            >
+              {children}
+            </Box>
           </Box>
         </Box>
       </body>
