@@ -13,6 +13,7 @@ import {
   Button,
   Divider,
   Stack,
+  InputLabel,
 } from "@mui/material";
 
 const invoiceFormSchema = z.object({
@@ -51,9 +52,12 @@ const InvoiceForm = () => {
           <Stack className="space-y-8 mt-6">
             <Box sx={{ display: "flex", gap: 3 }}>
               <Box sx={{ flex: 1 }}>
+                <InputLabel className="mb-3 font-semibold text-sm text-[#1c2434]">
+                  Name <span className="text-[#FF0000]">*</span>
+                </InputLabel>
                 <TextField
-                  label="Name"
                   fullWidth
+                  placeholder="Enter your invoice name"
                   variant="outlined"
                   error={!!errors.name}
                   helperText={errors.name?.message}
@@ -61,9 +65,12 @@ const InvoiceForm = () => {
                 />
               </Box>
               <Box sx={{ flex: 1 }}>
+                <InputLabel className="mb-3 font-semibold text-sm text-[#1c2434]">
+                  Number <span className="text-[#FF0000]">*</span>
+                </InputLabel>
                 <TextField
-                  label="Number"
                   fullWidth
+                  placeholder="Enter your invoice number"
                   variant="outlined"
                   error={!!errors.number}
                   helperText={errors.number?.message}
@@ -74,10 +81,14 @@ const InvoiceForm = () => {
 
             <Box sx={{ display: "flex", gap: 3 }}>
               <Box sx={{ flex: 1 }}>
+                <InputLabel className="mb-3 font-semibold text-sm text-[#1c2434]">
+                  Due Date <span className="text-[#FF0000]">*</span>
+                </InputLabel>
                 <TextField
-                  label="Due Date"
                   fullWidth
                   type="date"
+                  placeholder="DD/MM/YYYY"
+                  className="uppercase"
                   variant="outlined"
                   error={!!errors.dueDate}
                   helperText={errors.dueDate?.message}
@@ -85,10 +96,13 @@ const InvoiceForm = () => {
                 />
               </Box>
               <Box sx={{ flex: 1 }}>
+                <InputLabel className="mb-3 font-semibold text-sm text-[#1c2434]">
+                  Amount <span className="text-[#FF0000]">*</span>
+                </InputLabel>
                 <TextField
-                  label="Amount"
                   fullWidth
                   variant="outlined"
+                  placeholder="Enter your invoice amount"
                   type="number"
                   error={!!errors.amount}
                   helperText={errors.amount?.message}
@@ -99,10 +113,13 @@ const InvoiceForm = () => {
 
             <Box sx={{ display: "flex", gap: 3 }}>
               <Box sx={{ flex: 1 }}>
+                <InputLabel className="mb-3 font-semibold text-sm text-[#1c2434]">
+                  Status <span className="text-[#FF0000]">*</span>
+                </InputLabel>
                 <TextField
-                  label="Status"
                   fullWidth
                   variant="outlined"
+                  placeholder="Choose the status"
                   error={!!errors.status}
                   helperText={errors.status?.message}
                   {...register("status")}

@@ -101,8 +101,13 @@ function TopBar() {
             </IconButton>
             <IconButton className="bg-[#E2E8F0] h-[32px] w-[32px] mr-[30px]">
               <MessageIcon />
+              <Stack
+                className="absolute top-0 right-0 bg-[#DC3545] rounded-full w-[10px] h-[10px] p-[2px]"
+                style={{
+                  transform: "translate(1%, -1%)", // Moves the badge slightly out of the circle to the top-right
+                }}
+              />
             </IconButton>
-
             <Stack className="space-y-0 items-end mr-[15px]">
               <Typography className="text-sm/[16px] text-[#212B36]">
                 John Doe
