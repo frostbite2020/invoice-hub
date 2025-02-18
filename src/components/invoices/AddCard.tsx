@@ -40,17 +40,13 @@ const InvoiceForm = () => {
 
   return (
     <Card>
-      <CardContent sx={{ border: "1px solid var(--borderColor)" }}>
-        <Typography
-          variant="h6"
-          gutterBottom
-          sx={{ color: "var(--secondary)" }}
-        >
+      <CardContent sx={{ border: "1px solid #e2e8f0" }}>
+        <Typography variant="h6" gutterBottom sx={{ color: "#1c2434" }}>
           Invoice Form
         </Typography>
       </CardContent>
 
-      <CardContent sx={{ border: "1px solid var(--borderColor)" }}>
+      <CardContent sx={{ border: "1px solid #e2e8f0" }}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Stack className="space-y-8 mt-6">
             <Box sx={{ display: "flex", gap: 3 }}>
@@ -126,11 +122,10 @@ const InvoiceForm = () => {
               <Button
                 type="submit"
                 variant="contained"
-                className="font-medium capitalize"
+                className="font-medium capitalize bg-[#3c50e0]"
                 sx={{
                   width: 250,
                   height: 50,
-                  backgroundColor: "var(--primary)",
                 }}
               >
                 + Add Invoice

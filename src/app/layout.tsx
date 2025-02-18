@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import "./globals.css";
-import { Box, CssBaseline } from "@mui/material";
+import { Box, CssBaseline, Stack, StyledEngineProvider } from "@mui/material";
 import Sidebar from "@/components/sidebar/Sidebar";
 import TopBar from "@/components/topbar/Topbar";
+import ThemeProviderWrapper from "@/components/theme/themeProvider";
+import "./globals.css";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -31,26 +32,32 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <CssBaseline />
-        <Box sx={{ display: "flex", height: "100vh" }}>
-          <Sidebar />
+        <ThemeProviderWrapper>
+          <Box sx={{ display: "flex", height: "100vh" }}>
+            <Sidebar />
 
-          <Box
-            component="main"
-            sx={{
-              flexGrow: 1,
-              overflowY: "auto",
-              bgcolor: "var(--background)",
-            }}
-          >
-            <TopBar />
-            <Box
-              sx={{ width: "80%", margin: "auto", padding: "52px 3px 3px 3px" }}
+            <Stack
+              component="main"
+              sx={{
+                flexGrow: 1,
+                overflowY: "auto",
+                bgcolor: "var(--background)",
+              }}
             >
-              {children}
-            </Box>
+              <TopBar />
+              <Box
+                sx={{
+                  width: "80%",
+                  height: "100vh",
+                  margin: "auto",
+                  padding: "52px 3px 3px 3px",
+                }}
+              >
+                {children}
+              </Box>
+            </Stack>
           </Box>
-        </Box>
+        </ThemeProviderWrapper>
       </body>
     </html>
   );

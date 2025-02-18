@@ -26,8 +26,7 @@ export default function Sidebar() {
         "& .MuiDrawer-paper": {
           width: drawerWidth,
           boxSizing: "border-box",
-          backgroundColor: "var(--secondary)",
-          color: "var(--foreground)",
+          backgroundColor: "primary.main",
           paddingLeft: "24px",
           paddingTop: "28px",
         },
@@ -46,8 +45,7 @@ export default function Sidebar() {
             {section.label && (
               <Typography
                 variant="subtitle2"
-                className="uppercase font-semibold pl-4"
-                color="var(--sidebarSecondary)"
+                className="uppercase font-semibold pl-4 text-[#9d9d9d]"
               >
                 {section.label}
               </Typography>
@@ -61,22 +59,14 @@ export default function Sidebar() {
                     <ListItemButton key={menu.id} href={menu.path}>
                       <ListItemIcon className="min-w-0 w-7">
                         {menu.icon && (
-                          <menu.icon
-                            color={
-                              isActive
-                                ? "var(--sidebarMain)"
-                                : "var(--sidebarSecondary)"
-                            }
-                          />
+                          <menu.icon color={isActive ? "#f4f4f4" : "#9d9d9d"} />
                         )}
                       </ListItemIcon>
 
                       <ListItemText
                         primary={menu.label}
                         sx={{
-                          color: isActive
-                            ? "var(--sidebarMain)"
-                            : "var(--sidebarSecondary)",
+                          color: isActive ? "#f4f4f4" : "#9d9d9d",
                         }}
                       />
                     </ListItemButton>

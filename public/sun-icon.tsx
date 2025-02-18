@@ -1,4 +1,4 @@
-const ListIcon = ({ color = "currentColor" }: { color?: string }) => {
+const SunIcon = ({ color = "currentColor" }: { color?: string }) => {
   return (
     <svg
       width="16"
@@ -19,4 +19,4 @@ const ListIcon = ({ color = "currentColor" }: { color?: string }) => {
   );
 };
 
-export default ListIcon;
+export default SunIcon;

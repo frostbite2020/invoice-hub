@@ -7,7 +7,7 @@ const Pages = () => {
       <Typography
         variant="h5"
         className="mb-6"
-        sx={{ color: "var(--secondary)" }}
+        sx={{ color: "#1c2434" }}
       >
         Add Invoice
       </Typography>

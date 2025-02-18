@@ -1,4 +1,4 @@
-import TableList from "@/components/invoices/TableList";
+import TableMyInvoices from "@/components/invoices/TableMyInvoices";
 import { Stack, Typography } from "@mui/material";
 
 const Pages = () => {
@@ -7,12 +7,12 @@ const Pages = () => {
       <Typography
         variant="h5"
         className="mb-6"
-        sx={{ color: "var(--secondary)" }}
+        sx={{ color: "#1c2434" }}
       >
         My Invoices
       </Typography>
 
-      <TableList />
+      <TableMyInvoices />
     </Stack>
   );
 };
