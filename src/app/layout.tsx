@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { Box, CssBaseline, Stack, StyledEngineProvider } from "@mui/material";
 import Sidebar from "@/components/sidebar/Sidebar";
@@ -9,6 +9,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import "./globals.css";
 import { useState } from "react";
+import { SnackbarProvider } from "notistack";
 
 const openSans = Open_Sans({
   subsets: ["latin"],
@@ -27,32 +28,34 @@ export default function RootLayout({
     <html lang="en" className={openSans.variable}>
       <body className={`antialiased`}>
         <QueryClientProvider client={queryClient}>
-          <ThemeProviderWrapper>
-            <Box sx={{ display: "flex", height: "100vh" }}>
-              <Sidebar />
+          <SnackbarProvider>
+            <ThemeProviderWrapper>
+              <Box sx={{ display: "flex", height: "100vh" }}>
+                <Sidebar />
 
-              <Stack
-                component="main"
-                sx={{
-                  flexGrow: 1,
-                  overflowY: "auto",
-                  bgcolor: "var(--background)",
-                }}
-              >
-                <TopBar />
-                <Box
+                <Stack
+                  component="main"
                   sx={{
-                    width: "80%",
-                    height: "100vh",
-                    margin: "auto",
-                    padding: "52px 3px 3px 3px",
+                    flexGrow: 1,
+                    overflowY: "auto",
+                    bgcolor: "var(--background)",
                   }}
                 >
-                  {children}
-                </Box>
-              </Stack>
-            </Box>
-          </ThemeProviderWrapper>
+                  <TopBar />
+                  <Box
+                    sx={{
+                      width: "80%",
+                      height: "100vh",
+                      margin: "auto",
+                      padding: "52px 3px 3px 3px",
+                    }}
+                  >
+                    {children}
+                  </Box>
+                </Stack>
+              </Box>
+            </ThemeProviderWrapper>
+          </SnackbarProvider>
         </QueryClientProvider>
       </body>
     </html>

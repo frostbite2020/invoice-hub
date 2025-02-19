@@ -1,8 +1,8 @@
-'use client'
+"use client";
 
 import { Invoice, useInvoices, useRemoveInvoice } from "@/hooks/useInvoices";
 import { useSearchParams } from "next/navigation";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import {
   useReactTable,
   getCoreRowModel,
@@ -23,11 +23,16 @@ import {
   IconButton,
   Stack,
   Typography,
+  Menu,
+  MenuItem,
 } from "@mui/material";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
+import EditRoundedIcon from "@mui/icons-material/EditRounded";
+import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import { flexRender } from "@tanstack/react-table";
 import StatusBadge from "@/components/statusBadge/StatusBadge";
 import { Status } from "@/constants/enum";
+import { useSnackbar } from "notistack";
 
 const TableMyInvoices: React.FC = () => {
   const searchParams = useSearchParams();
@@ -36,6 +41,12 @@ const TableMyInvoices: React.FC = () => {
 
   const { data: invoices = [], isLoading, isError } = useInvoices();
   const { mutate: removeInvoice } = useRemoveInvoice();
+
+  const { enqueueSnackbar } = useSnackbar();
+
+  const handleClickEdit = () => {
+    enqueueSnackbar("Edit coming soon", { variant: "warning" });
+  };
 
   const columns = useMemo<ColumnDef<Invoice>[]>(
     () => [
@@ -76,11 +87,46 @@ const TableMyInvoices: React.FC = () => {
       {
         accessorKey: "actions",
         cell: (info) => {
+          const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
+          const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+            setAnchorEl(event.currentTarget);
+          };
+
+          const handleClose = () => {
+            setAnchorEl(null);
+          };
+
+          const handleEdit = () => {
+            handleClickEdit();
+            handleClose();
+          };
+
+          const handleDelete = () => {
+            removeInvoice(id);
+            handleClose();
+          };
+
           const { id } = info.row.original;
           return (
-            <IconButton size="small" onClick={() => removeInvoice(id)}>
-              <MenuRoundedIcon sx={{ color: "#7E7E7E" }} />
-            </IconButton>
+            <>
+              <IconButton size="small" onClick={handleClick}>
+                <MenuRoundedIcon sx={{ color: "#7E7E7E" }} />
+              </IconButton>
+
+              <Menu
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={handleEdit}>
+                  <EditRoundedIcon className="mr-2 text-blue-600" /> Edit
+                </MenuItem>
+                <MenuItem onClick={handleDelete}>
+                  <DeleteRoundedIcon className="mr-2 text-[#D34053]" /> Delete
+                </MenuItem>
+              </Menu>
+            </>
           );
         },
       },
