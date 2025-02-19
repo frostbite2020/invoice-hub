@@ -47,7 +47,7 @@ const InvoiceForm = () => {
 
   const { mutate: addInvoice } = useAddInvoice();
 
-  const onSubmit = (data: Invoice) => {
+  const onSubmit = (data: InvoiceFormData) => {
     const newInvoice: Invoice = {
       id: crypto.randomUUID(),
       invoiceName: data.invoiceName,
