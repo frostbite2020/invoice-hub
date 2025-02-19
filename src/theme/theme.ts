@@ -18,9 +18,12 @@ const theme = createTheme({
       primary: "#1c2434",
       secondary: "#9d9d9d",
     },
+    success: {
+      main: "#34D399",
+    },
   },
   typography: {
-    fontFamily: ["Inter", "sans-serif"].join(","),
+    fontFamily: "var(--font-open-sans), sans-serif",
   },
 });
 

@@ -11,7 +11,7 @@ export const SIDEBAR_MENU = [
       {
         id: "invoices-add",
         label: "Add Invoice",
-        icon: InvoiceIcon, // Sesuaikan dengan library ikon yang digunakan
+        icon: InvoiceIcon,
         path: "/invoices/add",
       },
       {

@@ -1,13 +1,13 @@
+import { Status } from "@/constants/enum";
 import { faker } from "@faker-js/faker";
+import { format } from "date-fns";
 
-export type Person = {
-  firstName: string;
-  lastName: string;
-  age: number;
-  visits: number;
-  progress: number;
-  status: "relationship" | "complicated" | "single";
-  subRows?: Person[];
+export type Invoice = {
+  invoiceName: string;
+  invoiceNumber: string;
+  dueDate: string;
+  status: Status;
+  amount: string;
 };
 
 const range = (len: number) => {
@@ -18,28 +18,34 @@ const range = (len: number) => {
   return arr;
 };
 
-const newPerson = (): Person => {
+function getRandomNumberString(length: number): string {
+  return Array.from({ length }, () => Math.floor(Math.random() * 10)).join("");
+}
+
+const newInvoice = (): Invoice => {
+  const enumValues = Object.values(Status);
+  const formattedDate = format(faker.date.future(), "MMM dd, yyyy");
+  const formattedCurrency = new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+    minimumFractionDigits: 0,
+  }).format(Number(faker.commerce.price({ min: 10000, max: 1000000, dec: 0 })));
+
   return {
-    firstName: faker.person.firstName(),
-    lastName: faker.person.lastName(),
-    age: faker.number.int(40),
-    visits: faker.number.int(1000),
-    progress: faker.number.int(100),
-    status: faker.helpers.shuffle<Person["status"]>([
-      "relationship",
-      "complicated",
-      "single",
-    ])[0]!,
+    invoiceName: faker.commerce.productName(),
+    invoiceNumber: `INV` + getRandomNumberString(6),
+    dueDate: formattedDate,
+    status: faker.helpers.shuffle(enumValues)[0],
+    amount: formattedCurrency,
   };
 };
 
 export function makeData(...lens: number[]) {
-  const makeDataLevel = (depth = 0): Person[] => {
+  const makeDataLevel = (depth = 0): Invoice[] => {
     const len = lens[depth]!;
-    return range(len).map((d): Person => {
+    return range(len).map((d): Invoice => {
       return {
-        ...newPerson(),
-        subRows: lens[depth + 1] ? makeDataLevel(depth + 1) : undefined,
+        ...newInvoice(),
       };
     });
   };

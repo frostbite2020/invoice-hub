@@ -1,12 +1,11 @@
 import InvoiceForm from "@/components/invoices/AddCard";
-import { Card, CardContent, Stack, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 
 const Pages = () => {
   return (
     <Stack>
       <Typography
-        variant="h5"
-        className="mb-6"
+        className="mb-6 font-bold text-[26px]"
         sx={{ color: "#1c2434" }}
       >
         Add Invoice

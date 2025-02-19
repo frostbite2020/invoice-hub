@@ -104,7 +104,7 @@ function TopBar() {
               <Stack
                 className="absolute top-0 right-0 bg-[#DC3545] rounded-full w-[10px] h-[10px] p-[2px]"
                 style={{
-                  transform: "translate(1%, -1%)", // Moves the badge slightly out of the circle to the top-right
+                  transform: "translate(1%, -1%)",
                 }}
               />
             </IconButton>
