@@ -11,7 +11,7 @@ export default function NotFound() {
         404 - Page Not Found
       </Typography>
       <Typography variant="body1" className="text-gray-600 mt-2 text-center">
-        Sorry, the page you're looking for does not exist.
+        Sorry, the page you&apos;re looking for does not exist.
       </Typography>
 
       <Link href="/invoices/add" passHref>
