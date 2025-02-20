@@ -1,5 +1,8 @@
 # Next.js Project Setup
 
+## Access on browser
+https://inv-hub.netlify.app/
+
 ## Prerequisites
 - Node.js (LTS version recommended)
 - npm or yarn
