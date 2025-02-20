@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Stack, Typography, IconButton } from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
@@ -42,7 +42,7 @@ const ToastNotification = ({ message, isOpen, onClose }: ToastProps) => {
                 {message}
               </Typography>
               <Typography className="text-[#637381] text-[16px]">
-                You can view and manage your invoice in the 'My Invoices'
+                You can view and manage your invoice in the &apos;My Invoices&apos;
                 section.
               </Typography>
             </Stack>

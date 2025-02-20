@@ -13,7 +13,6 @@ import {
   Button,
   Stack,
   InputLabel,
-  InputAdornment,
   FormControl,
   Select,
   MenuItem,

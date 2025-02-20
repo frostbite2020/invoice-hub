@@ -2,13 +2,11 @@
 
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { drawerWidth } from "@/constants/menu";
@@ -16,36 +14,24 @@ import photo from "../../../public/profile-pict.png";
 import Image from "next/image";
 import MessageIcon from "../../../public/message-icon";
 import NotificationIcon from "../../../public/notification";
-import ToggleSwitch from "../buttons/Switch";
 import { Stack } from "@mui/material";
 import { MoonIcon } from "@heroicons/react/24/solid";
 import SunIcon from "../../../public/sun-icon";
 import ArrowIcon from "../../../public/arrow-icon";
 
-const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function TopBar() {
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-    null
-  );
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
+  const [userDropdown, setuserDropdown] = React.useState<null | HTMLElement>(
     null
   );
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
+    setuserDropdown(event.currentTarget);
   };
 
   const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
+    setuserDropdown(null);
   };
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -55,17 +41,12 @@ function TopBar() {
     setAnchorEl(anchorEl ? null : event.currentTarget);
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
   const [isOn, setIsOn] = React.useState(false);
 
   const toggleSwitch = () => {
     setIsOn((prev) => !prev);
   };
 
-  const profileSwitch = () => {};
   return (
     <AppBar
       position="static"
@@ -129,7 +110,7 @@ function TopBar() {
             <Menu
               sx={{ mt: "45px" }}
               id="menu-appbar"
-              anchorEl={anchorElUser}
+              anchorEl={userDropdown}
               anchorOrigin={{
                 vertical: "top",
                 horizontal: "right",
@@ -139,7 +120,7 @@ function TopBar() {
                 vertical: "top",
                 horizontal: "right",
               }}
-              open={Boolean(anchorElUser)}
+              open={Boolean(userDropdown)}
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (

@@ -2,7 +2,7 @@
 
 import { Invoice, useInvoices, useRemoveInvoice } from "@/hooks/useInvoices";
 import { useSearchParams } from "next/navigation";
-import { useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import {
   useReactTable,
   getCoreRowModel,
@@ -48,6 +48,26 @@ const TableMyInvoices: React.FC = () => {
     enqueueSnackbar("Edit coming soon", { variant: "warning" });
   };
 
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleEdit = () => {
+    handleClickEdit();
+    handleClose();
+  };
+
+  const handleDelete = (id: string) => {
+    removeInvoice(id);
+    handleClose();
+  };
+
   const columns = useMemo<ColumnDef<Invoice>[]>(
     () => [
       {
@@ -87,26 +107,6 @@ const TableMyInvoices: React.FC = () => {
       {
         accessorKey: "actions",
         cell: (info) => {
-          const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-
-          const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-            setAnchorEl(event.currentTarget);
-          };
-
-          const handleClose = () => {
-            setAnchorEl(null);
-          };
-
-          const handleEdit = () => {
-            handleClickEdit();
-            handleClose();
-          };
-
-          const handleDelete = () => {
-            removeInvoice(id);
-            handleClose();
-          };
-
           const { id } = info.row.original;
           return (
             <>
@@ -122,7 +122,7 @@ const TableMyInvoices: React.FC = () => {
                 <MenuItem onClick={handleEdit}>
                   <EditRoundedIcon className="mr-2 text-blue-600" /> Edit
                 </MenuItem>
-                <MenuItem onClick={handleDelete}>
+                <MenuItem onClick={() => handleDelete(id)}>
                   <DeleteRoundedIcon className="mr-2 text-[#D34053]" /> Delete
                 </MenuItem>
               </Menu>
@@ -131,7 +131,7 @@ const TableMyInvoices: React.FC = () => {
         },
       },
     ],
-    [removeInvoice]
+    [removeInvoice, handleDelete]
   );
 
   const filteredData = useMemo(() => {
