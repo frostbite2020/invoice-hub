@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, CssBaseline, Stack, StyledEngineProvider } from "@mui/material";
+import { Box, CircularProgress, Stack } from "@mui/material";
 import Sidebar from "@/components/sidebar/Sidebar";
 import TopBar from "@/components/topbar/Topbar";
 import ThemeProviderWrapper from "@/components/theme/themeProvider";
@@ -8,7 +8,7 @@ import { Open_Sans } from "next/font/google";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import "./globals.css";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { SnackbarProvider } from "notistack";
 
 const openSans = Open_Sans({
@@ -50,7 +50,15 @@ export default function RootLayout({
                       padding: "52px 3px 3px 3px",
                     }}
                   >
-                    {children}
+                    <Suspense
+                      fallback={
+                        <Box className="flex items-center justify-center h-screen bg-gray-100">
+                          <CircularProgress size={50} color="primary" />
+                        </Box>
+                      }
+                    >
+                      {children}
+                    </Suspense>
                   </Box>
                 </Stack>
               </Box>

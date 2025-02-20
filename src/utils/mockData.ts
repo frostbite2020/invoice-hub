@@ -43,7 +43,7 @@ const newInvoice = (): Invoice => {
 export function makeData(...lens: number[]) {
   const makeDataLevel = (depth = 0): Invoice[] => {
     const len = lens[depth]!;
-    return range(len).map((d): Invoice => {
+    return range(len).map((): Invoice => {
       return {
         ...newInvoice(),
       };
