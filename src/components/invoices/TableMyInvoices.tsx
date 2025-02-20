@@ -48,24 +48,47 @@ const TableMyInvoices: React.FC = () => {
     enqueueSnackbar("Edit coming soon", { variant: "warning" });
   };
 
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const ActionMenu: React.FC<{ id: string }> = ({ id }) => {
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
+    const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+      setAnchorEl(event.currentTarget);
+    };
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
 
-  const handleEdit = () => {
-    handleClickEdit();
-    handleClose();
-  };
+    const handleEdit = () => {
+      handleClickEdit();
+      handleClose();
+    };
 
-  const handleDelete = (id: string) => {
-    removeInvoice(id);
-    handleClose();
+    const handleDelete = () => {
+      removeInvoice(id);
+      handleClose();
+    };
+
+    return (
+      <>
+        <IconButton size="small" onClick={handleClick}>
+          <MenuRoundedIcon sx={{ color: "#7E7E7E" }} />
+        </IconButton>
+
+        <Menu
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
+          onClose={handleClose}
+        >
+          <MenuItem onClick={handleEdit}>
+            <EditRoundedIcon className="mr-2 text-blue-600" /> Edit
+          </MenuItem>
+          <MenuItem onClick={handleDelete}>
+            <DeleteRoundedIcon className="mr-2 text-[#D34053]" /> Delete
+          </MenuItem>
+        </Menu>
+      </>
+    );
   };
 
   const columns = useMemo<ColumnDef<Invoice>[]>(
@@ -106,32 +129,10 @@ const TableMyInvoices: React.FC = () => {
       },
       {
         accessorKey: "actions",
-        cell: (info) => {
-          const { id } = info.row.original;
-          return (
-            <>
-              <IconButton size="small" onClick={handleClick}>
-                <MenuRoundedIcon sx={{ color: "#7E7E7E" }} />
-              </IconButton>
-
-              <Menu
-                anchorEl={anchorEl}
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={handleEdit}>
-                  <EditRoundedIcon className="mr-2 text-blue-600" /> Edit
-                </MenuItem>
-                <MenuItem onClick={() => handleDelete(id)}>
-                  <DeleteRoundedIcon className="mr-2 text-[#D34053]" /> Delete
-                </MenuItem>
-              </Menu>
-            </>
-          );
-        },
+        cell: (info) => <ActionMenu id={info.row.original.id} />,
       },
     ],
-    [removeInvoice, handleDelete]
+    [removeInvoice]
   );
 
   const filteredData = useMemo(() => {
